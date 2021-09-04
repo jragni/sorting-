@@ -4,7 +4,6 @@ function merge(arr1, arr2) {
   let i = 0;
   let j = 0;
   let mergedArr = [];
-  let solution = [];
   while (arr1[i] !== undefined && arr2[j] !== undefined) {
     if (arr1[i] < arr2[j]) {
       mergedArr.push(arr1[i]);
@@ -29,7 +28,21 @@ function merge(arr1, arr2) {
   }
 }
 
-function mergeSort() {}
+function mergeSort(arr) {
+  function _splitter(array) {
+    // [ 3 1 5 7 4 8]
+    // [3 1 5] [7 4 8]
+    // [3] [1 5] [7] [4 8]
+    // [3] [1] [5] [7] [4] [8]
+
+    if (arr.length > 1) {
+      let right = array.slice(0, Math.floor(array.length / 2));
+      let left = array.slice(Math.floor(array.length / 2));
+      return merge(_splitter(right), _splitter(left));
+    }
+  }
+  return _splitter(arr);
+}
 
 module.exports = { merge, mergeSort };
 
